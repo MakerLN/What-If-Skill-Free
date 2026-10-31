@@ -14,7 +14,7 @@ ElevenLabs, used for the voice (with word timings) and the sound effects.
 Everything below swaps those two pieces and leaves the rest alone, so the
 episodes keep the same look and pacing.
 
-## Step 0: set up once
+## Step 0: set up once (the agent does this on first use)
 
 1. Confirm the original skill is installed. Look for its `SKILL.md`,
    `references/`, `scripts/` and `studio/` in the skills folder (for example
@@ -24,8 +24,15 @@ episodes keep the same look and pacing.
 2. Make sure the studio has been copied to the working folder and
    `npm install` has run there (the original README has the commands).
 3. Run `python scripts/voice_free.py --check` from this skill's folder. It
-   lists which free tools are installed and prints the exact install
-   commands for the missing ones. Fix those before generating anything.
+   lists which free tools are installed and which are missing.
+4. If anything is missing, install it yourself instead of sending the user
+   to do it by hand. Tell the user in one line what you're installing (the
+   Python packages include PyTorch, so the download is large), then run
+   `python -m pip install -r requirements.txt` from this skill's folder.
+   On Windows, `install_windows.bat` in the same folder also installs ffmpeg
+   and espeak-ng with winget; on Mac or Linux install those two with the
+   system package manager. Run `--check` again and stop only if something is
+   still missing. Do this automatically the first time the skill is used.
 
 ## Step 1: follow the original pipeline, with two swaps
 
